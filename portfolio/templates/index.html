@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ c.name }} | Aspiring Web Developer, AI &amp; Automation Enthusiast</title>
+<meta name="description" content="Portfolio of {{ c.name }} from {{ c.location }}: frontend web development, programming fundamentals, AI tools, Botpress automation and digital design.">
+<meta property="og:title" content="{{ c.name }} | Portfolio">
+<meta property="og:description" content="Building my future through technology, creativity and AI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000000'/%3E%3Ctext x='16' y='22' font-size='15' text-anchor='middle' fill='%237FA8FF' font-family='serif'%3EMA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body data-whatsapp="{{ c.whatsapp_number }}" data-wa-msg="{{ c.whatsapp_message }}" data-instagram="{{ c.instagram_username }}" data-email="{{ c.email }}">
+
+<header class="nav" id="nav">
+  <a class="brand" href="#home" aria-label="{{ c.name }} home"><span class="mono">{{ c.initials }}</span><span>{{ c.name }}</span></a>
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="links" aria-label="Toggle menu"><span></span><span></span></button>
+  <nav class="links" id="links" aria-label="Main">
+    <a href="#home">Home</a><a href="#expertise">Expertise</a><a href="#projects">Projects</a><a href="#education">Education</a><a href="#contact">Contact</a>
+    <span class="status"><i></i>Open to Opportunities</span>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="aurora" aria-hidden="true"><b></b><b></b><b></b></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="kicker">Hello, I'm {{ c.name }}</p>
+    <h1>Building My Future Through <em>Technology</em>, <em class="t">Creativity</em> &amp; AI.</h1>
+    <p class="lead">Exploring code, creating digital experiences, experimenting with AI, and turning ideas into practical solutions.</p>
+    <p class="rotator" aria-live="polite"><span class="r-label">Currently exploring:</span> <span id="rotText">Frontend Web Development</span><span class="caret"></span></p>
+    <div class="cta">
+      <a class="btn primary" href="#projects">Explore My Work</a>
+      <a class="btn ghost" href="#contact">Let's Connect</a>
+    </div>
+  </div>
+  <a class="scroll" href="#marquee" aria-label="Scroll down"><span></span></a>
+</section>
+
+<section class="marquee" id="marquee" aria-label="Skills">
+  <div class="track">
+    {% for _ in range(2) %}
+    <ul class="group" {% if loop.index == 2 %}aria-hidden="true"{% endif %}>
+      {% for w in ["Python","HTML","CSS","Java","AI Tools","Prompt Writing","Botpress","Automation","Social Media","Post Design","Problem Solving","Professional Communication"] %}
+      <li class="{{ 'hl' if loop.index0 % 3 == 1 }}">{{ w }}</li><li class="sep" aria-hidden="true">&#10035;</li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section" id="expertise">
+  <div class="head"><h2>What I'm Exploring</h2><p>Building practical skills at the intersection of technology, creativity, and communication.</p></div>
+  <div class="grid">
+    {% set cards = [
+      ("Programming Fundamentals","Python, C, and Java basics: variables, loops, functions, conditions and basic problem solving.","M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 7l-3 10"),
+      ("Frontend Development","HTML, CSS, and responsive web layouts.","M3 5h18v14H3zM3 9h18"),
+      ("AI &amp; Prompt Writing","Using AI tools for research, content, everyday productivity and creative problem-solving.","M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"),
+      ("Workflow Automation","Chatbot flows with Botpress and basic automated processes.","M4 12h6l2-5 2 10 2-5h4"),
+      ("Digital Design &amp; Social Media","Social media management, post design, and digital content creation.","M4 4h16v12H4zM8 20h8M12 16v4"),
+      ("Communication &amp; Problem-Solving","Certified English communication, collaboration, and logical thinking.","M4 5h16v10H9l-5 4z")
+    ] %}
+    {% for t,d,p in cards %}
+    <article class="card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="{{ p }}"/></svg><h3>{{ t|safe }}</h3><p>{{ d|safe }}</p></article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section alt" id="projects">
+  <div class="head"><h2>Selected Work</h2><p>A growing collection of projects, experiments, and creative explorations.</p></div>
+  <div class="grid">
+    {% for p in c.projects %}
+    <article class="card project">
+      <div class="thumb" aria-hidden="true"><span>{{ p.tag_line }}</span></div>
+      <h3>{{ p.title }}</h3><p>{{ p.desc }}</p>
+      <ul class="tags">{% for t in p.tags %}<li>{{ t }}</li>{% endfor %}</ul>
+      {% if p.url %}<a class="link" href="{{ p.url }}" target="_blank" rel="noopener">View project</a>{% else %}<span class="soon">Coming Soon</span>{% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  <div class="showcase">
+    <h3 class="sc-title">Web &amp; Motion Design Showcase</h3>
+    <p>Website walkthroughs and presentation designs I put together while learning web design and digital content creation.</p>
+    <div class="reel">
+      {% for v in c.videos %}
+      <figure class="clip"><video controls muted playsinline preload="none" poster="/media/{{ v.file }}.jpg"><source src="/media/{{ v.file }}.mp4" type="video/mp4"></video>
+        <figcaption>{{ v.title }}<span>{{ v.desc }}</span></figcaption></figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="education">
+  <div class="head"><h2>My Learning Journey</h2></div>
+  <ol class="timeline">
+    <li><h3>Intermediate in ICS (Physics)</h3><p>Physics, Computer Science, Mathematics</p><span class="pill">Completed</span></li>
+    <li><h3>DAE: Diploma of Associate Engineering in Electronics</h3><p>Punjab Board of Technical Education (PBTE)</p><span class="pill now">Currently Studying</span></li>
+    <li><h3>English Language Certification Course</h3><p>Certified, fluent spoken and written English. Urdu is my native language.</p><span class="pill">Completed</span></li>
+  </ol>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Have an Idea? Let's Build Something.</h2>
+  <p>I'm open to learning opportunities, internships, collaborations, and exciting digital projects.</p>
+  <div class="cta center">
+    <a class="btn primary" id="emailBtn" href="#contact">Contact Me</a>
+    <a class="btn ghost" id="waBtn" href="#contact" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn ghost" id="igBtn" href="#contact" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="brand"><span class="mono">{{ c.initials }}</span><span>{{ c.name }}</span></div>
+  <p>Learning, building and creating, one project at a time.</p>
+  <div class="f-links"><a id="waFoot" href="#contact" target="_blank" rel="noopener">WhatsApp</a><a id="igFoot" href="#contact" target="_blank" rel="noopener">Instagram</a><a href="#home">Back to top</a></div>
+  <small>&copy; <span id="year">2026</span> {{ c.name }}. All rights reserved.</small>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
